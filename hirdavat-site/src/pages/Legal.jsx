@@ -1,56 +1,68 @@
 import { useParams } from 'react-router-dom'
 
 const CONTENT = {
+  'hakkimizda': {
+    title: 'Hakkımızda',
+    text: `
+      <h2>Biz Kimiz?</h2>
+      <p>HKC İnşaat ve Yapı Malzemeleri olarak yılların verdiği tecrübe ile inşaat, makine ve hırdavat sektöründe kaliteli ve güvenilir hizmet sunuyoruz.</p>
+      <h2>Vizyonumuz</h2>
+      <p>Müşteri memnuniyetini en üst düzeyde tutarak, sektördeki yenilikleri takip edip en kaliteli ürünleri en uygun fiyatlarla sunmaktır.</p>
+      <h2>Misyonumuz</h2>
+      <p>İhtiyaçlara anında cevap verebilen, dürüst ve ilkeli ticaret anlayışımızla tüm Türkiye'ye hizmet vermek.</p>
+    `
+  },
+  'gizlilik-sozlesmesi': {
+    title: 'Gizlilik Sözleşmesi',
+    text: `
+      <h2>1. GİZLİLİK POLİTİKASI</h2>
+      <p>HKC İnşaat ve Yapı Malzemeleri ("Şirket") olarak, web sitemizi ziyaret eden ve hizmetlerimizden faydalanan kullanıcılarımızın kişisel verilerinin güvenliğine büyük önem veriyoruz.</p>
+      <h2>2. VERİ TOPLAMA VE KULLANIMI</h2>
+      <p>Sipariş işlemleri için ad, soyad, iletişim bilgileri ve adres gibi temel bilgileriniz talep edilmektedir. Bu bilgiler sipariş sürecini tamamlamak haricinde hiçbir üçüncü taraf şirket veya şahısla paylaşılmamaktadır.</p>
+      <h2>3. ÇEREZLER (COOKIES)</h2>
+      <p>Web sitemiz, alışveriş deneyiminizi iyileştirmek için çerezler kullanmaktadır.</p>
+    `
+  },
+  'mesafeli-satis-sozlesmesi': {
+    title: 'Mesafeli Satış Sözleşmesi',
+    text: `
+      <h2>1. TARAFLAR</h2>
+      <p>Bu sözleşme, alıcı (tüketici) ile satıcı (HKC İnşaat) arasında, dijital ortamda kurulan satış ilişkisini düzenler.</p>
+      <h2>2. SÖZLEŞMENİN KONUSU</h2>
+      <p>İşbu sözleşmenin konusu, alıcının satıcıya ait internet sitesinden elektronik ortamda siparişini yaptığı ürünlerin satışı ve teslimidir.</p>
+      <h2>3. CAYMA HAKKI</h2>
+      <p>Alıcı, ürünü teslim aldıktan sonra 14 gün içinde hiçbir gerekçe göstermeksizin cayma hakkına sahiptir.</p>
+      <h2>4. YETKİLİ MAHKEME</h2>
+      <p>İşbu sözleşmenin uygulanmasında, T.C. Sanayi ve Ticaret Bakanlığı tarafından ilan edilen değere kadar Tüketici Hakem Heyetleri ile alıcının veya satıcının yerleşim yerindeki Tüketici Mahkemeleri yetkilidir.</p>
+    `
+  },
+  'teslimat-iade': {
+    title: 'Teslimat ve İade Şartları',
+    text: `
+      <h2>1. TESLİMAT BİLGİLERİ</h2>
+      <p>Siparişleriniz onaylandıktan sonra en geç 3 iş günü içinde anlaşmalı kargo şirketine teslim edilmektedir. Kargo takip numarası e-posta adresinize gönderilir.</p>
+      <h2>2. İADE KOŞULLARI</h2>
+      <p>Satın aldığınız ürünleri teslim tarihinden itibaren 14 gün içerisinde kullanılmamış ve orijinal ambalajı bozulmamış şekilde iade edebilirsiniz.</p>
+      <h2>3. HASARLI ÜRÜNLER</h2>
+      <p>Kargo teslimatı sırasında pakette hasar varsa kargo görevlisine tutanak tutturarak ürünü teslim almayınız ve tarafımıza bilgi veriniz.</p>
+    `
+  },
   'on-bilgilendirme': {
     title: 'Ön Bilgilendirme Formu',
     text: `
       <h2>1. TARAFLAR</h2>
       <p>İşbu Ön Bilgilendirme Formu ("Form"), [HKC İnşaat ve Yapı Malzemeleri] ("Satıcı") ile sipariş veren müşteri ("Alıcı") arasında düzenlenmiştir.</p>
-      
       <h2>2. SÖZLEŞMENİN KONUSU</h2>
-      <p>İşbu Form'un konusu, Alıcı'nın Satıcı'ya ait web sitesinden sipariş verdiği ürün ve hizmetlerin satışı ve teslimatı ile ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümleri uyarınca bilgilendirilmesidir.</p>
-      
-      <h2>3. TESLİMAT BİLGİLERİ</h2>
-      <p>Ürün, Alıcı'nın sipariş sayfasında belirttiği adrese kargo şirketi aracılığıyla teslim edilecektir. Teslimat masrafları sipariş esnasında aksi belirtilmedikçe Alıcı'ya aittir.</p>
-
-      <h2>4. CAYMA HAKKI</h2>
-      <p>Alıcı, ürünü teslim aldığı andan itibaren 14 gün içerisinde hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkına sahiptir. Cayma hakkı süresi içinde ürünün kullanılmamış olması şarttır.</p>
+      <p>İşbu Form'un konusu, Alıcı'nın Satıcı'ya ait web sitesinden sipariş verdiği ürün ve hizmetlerin satışı ve teslimatı ile ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun uyarınca bilgilendirilmesidir.</p>
     `
   },
   'kvkk': {
     title: 'KVKK Aydınlatma Metni',
     text: `
       <h2>1. VERİ SORUMLUSU</h2>
-      <p>Kişisel verileriniz, veri sorumlusu sıfatıyla [HKC İnşaat ve Yapı Malzemeleri] tarafından 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında işlenmektedir.</p>
-
-      <h2>2. KİŞİSEL VERİLERİN İŞLENME AMACI</h2>
-      <p>Toplanan kişisel verileriniz; sipariş süreçlerinin yürütülmesi, müşteri iletişimi, faturalandırma ve yasal yükümlülüklerin yerine getirilmesi amacıyla işlenmektedir.</p>
-
-      <h2>3. AKTARIM</h2>
-      <p>Kişisel verileriniz, sadece hukuki zorunluluklar ve teslimatın sağlanması (kargo şirketleri) amaçlarıyla KVKK'ya uygun olarak üçüncü kişilere aktarılabilir.</p>
-
-      <h2>4. İLGİLİ KİŞİNİN HAKLARI</h2>
-      <p>KVKK Madde 11 uyarınca; verilerinizin işlenip işlenmediğini öğrenme, işlenme amacını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini isteme haklarına sahipsiniz.</p>
-    `
-  },
-  'iptal-iade': {
-    title: 'İptal ve İade Koşulları',
-    text: `
-      <h2>1. SİPARİŞ İPTALİ</h2>
-      <p>Siparişiniz kargoya verilmeden önce "Siparişlerim" sayfası üzerinden veya müşteri hizmetleri aracılığıyla iptal talebinde bulunabilirsiniz.</p>
-
-      <h2>2. İADE KOŞULLARI</h2>
-      <p>Satın aldığınız ürünleri, kargo teslim tarihinden itibaren 14 (on dört) gün içerisinde ambalajı bozulmamış, kullanılmamış ve tekrar satılabilir halde iade edebilirsiniz.</p>
-
-      <h2>3. İADE SÜRECİ</h2>
-      <ul>
-        <li>İade etmek istediğiniz ürünü orijinal kutusuyla paketleyin.</li>
-        <li>Bize ulaşarak iade kargo kodu alın.</li>
-        <li>Ürünü anlaşmalı kargo şubemize teslim edin.</li>
-      </ul>
-
-      <h2>4. İADE KAPSAMI DIŞINDAKİ ÜRÜNLER</h2>
-      <p>Tek kullanımlık ürünler, hızlı bozulan veya son kullanma tarihi geçme ihtimali olan ürünler, kullanıldıktan sonra sağlık veya hijyen açısından iadeye uygun olmayan (koruyucu ekipman vb.) iade alınamaz.</p>
+      <p>Kişisel verileriniz, veri sorumlusu sıfatıyla [HKC İnşaat ve Yapı Malzemeleri] tarafından 6698 sayılı KVKK kapsamında işlenmektedir.</p>
+      <h2>2. İŞLENME AMACI</h2>
+      <p>Kişisel verileriniz; sipariş süreçlerinin yürütülmesi ve yasal yükümlülüklerin yerine getirilmesi amacıyla işlenmektedir.</p>
     `
   }
 }
