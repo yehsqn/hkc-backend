@@ -2,7 +2,7 @@ import { Router } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { OAuth2Client } from 'google-auth-library'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import { db } from '../db/client.js'
 
 const router = Router()
@@ -19,15 +19,7 @@ function makeToken(user) {
   )
 }
 
-function createTransporter() {
-  return nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
-    },
-  })
-}
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Kayıt ol
 router.post('/register', async (req, res) => {
@@ -143,17 +135,16 @@ router.post('/forgot-password', async (req, res) => {
 
     resetCodes.set(email, { code, expiresAt })
 
-    // Email gönder
-    const transporter = createTransporter()
-    await transporter.sendMail({
-      from: `"HKC Hırdavat" <${process.env.GMAIL_USER}>`,
+    // Email gönder (Resend)
+    const { data, error } = await resend.emails.send({
+      from: 'HKC Hırdavat <noreply@hakansezerinsaat.com>',
       to: email,
       subject: 'Şifre Sıfırlama Kodunuz',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #f9fafb; border-radius: 12px;">
-          <h2 style="color: #1e40af; margin-bottom: 8px;">Şifre Sıfırlama</h2>
+          <h2 style="color: #d97706; margin-bottom: 8px;">Şifre Sıfırlama</h2>
           <p style="color: #374151; margin-bottom: 24px;">Aşağıdaki 6 haneli kodu kullanarak şifrenizi sıfırlayabilirsiniz.</p>
-          <div style="background: #1e40af; color: white; font-size: 36px; font-weight: bold; letter-spacing: 12px; text-align: center; padding: 20px 32px; border-radius: 8px; margin-bottom: 24px;">
+          <div style="background: #d97706; color: white; font-size: 36px; font-weight: bold; letter-spacing: 12px; text-align: center; padding: 20px 32px; border-radius: 8px; margin-bottom: 24px;">
             ${code}
           </div>
           <p style="color: #6b7280; font-size: 14px;">Bu kod <strong>10 dakika</strong> geçerlidir. Eğer şifre sıfırlama talebinde bulunmadıysanız bu emaili dikkate almayın.</p>
@@ -163,6 +154,12 @@ router.post('/forgot-password', async (req, res) => {
       `,
     })
 
+    if (error) {
+      console.error('Resend error:', error)
+      return res.status(500).json({ error: 'Email gönderilemedi. Lütfen tekrar deneyin.' })
+    }
+
+    console.log('✅ Mail gönderildi:', data?.id, '→', email)
     res.json({ success: true })
   } catch (err) {
     console.error('Forgot password error:', err)
