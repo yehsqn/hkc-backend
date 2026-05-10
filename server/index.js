@@ -20,7 +20,14 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173').
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true)
+    // Localhost veya izin verilen originler veya hakansezerinsaat.com uzantılı her şey
+    if (!origin || 
+        allowedOrigins.includes(origin) || 
+        origin.endsWith('hakansezerinsaat.com') ||
+        origin.endsWith('onrender.com')
+    ) {
+      return cb(null, true)
+    }
     cb(new Error('CORS engellendi'))
   },
   credentials: true,
